@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prepare2Nspire | Cascading Hub & Research Pulse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .gold-accent { color: #FFCC33; }
+    .bg-gold { background-color: #FFCC33; }
+    .maroon-primary { color: #7A0019; }
+    .bg-maroon { background-color: #7A0019; }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800">
+
+  <!-- Top Navigation -->
+  <header class="bg-maroon text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-gold text-maroon font-bold flex items-center justify-center text-xl shadow">
+          P2N
+        </div>
+        <div>
+          <h1 class="text-lg font-bold leading-none tracking-tight">Prepare2Nspire</h1>
+          <span class="text-xs text-amber-200">STEM Cascading Learning & Research Hub</span>
+        </div>
+      </div>
+
+      <!-- Persona Switcher -->
+      <nav class="flex bg-red-950/40 p-1 rounded-xl text-xs font-semibold">
+        <button onclick="switchTab('pulse')" id="tab-pulse" class="px-3 py-1.5 rounded-lg bg-gold text-maroon shadow transition">
+          1. Scholar Pulse Check
+        </button>
+        <button onclick="switchTab('pod')" id="tab-pod" class="px-3 py-1.5 rounded-lg text-amber-100 hover:text-white transition">
+          2. Mentutor Pod View
+        </button>
+        <button onclick="switchTab('research')" id="tab-research" class="px-3 py-1.5 rounded-lg text-amber-100 hover:text-white transition">
+          3. Research Dashboard (Dr. Clarkson)
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-4 md:p-6 mt-4">
+
+    <!-- VIEW 1: SCHOLAR PULSE (MOBILE-FIRST 60-SEC CHECK-IN) -->
+    <section id="view-pulse" class="space-y-6">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full">Weekly Session Check-in</span>
+            <h2 class="text-xl font-bold mt-2">Wednesday Math Pulse</h2>
+            <p class="text-sm text-slate-500">Welcome back, Omar! (8th Grade Cohort)</p>
+          </div>
+          <span class="text-2xl">⚡</span>
+        </div>
+
+        <form id="pulseForm" onsubmit="handlePulseSubmit(event)" class="mt-6 space-y-6">
+          <!-- Question 1: Confidence Rating -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">
+              1. How confident do you feel about today's math concepts?
+            </label>
+            <div class="grid grid-cols-5 gap-2 text-center">
+              <button type="button" onclick="selectScore(1)" class="score-btn p-3 rounded-xl border border-slate-200 hover:border-amber-400 font-bold text-slate-700 transition">1<br><span class="text-xs font-normal">Stuck</span></button>
+              <button type="button" onclick="selectScore(2)" class="score-btn p-3 rounded-xl border border-slate-200 hover:border-amber-400 font-bold text-slate-700 transition">2<br><span class="text-xs font-normal">Unsure</span></button>
+              <button type="button" onclick="selectScore(3)" class="score-btn p-3 rounded-xl border border-slate-200 hover:border-amber-400 font-bold text-slate-700 transition">3<br><span class="text-xs font-normal">Getting It</span></button>
+              <button type="button" onclick="selectScore(4)" class="score-btn p-3 rounded-xl border border-slate-200 hover:border-amber-400 font-bold text-slate-700 transition">4<br><span class="text-xs font-normal">Confident</span></button>
+              <button type="button" onclick="selectScore(5)" class="score-btn p-3 rounded-xl border border-slate-200 hover:border-amber-400 font-bold text-slate-700 transition">5<br><span class="text-xs font-normal">Mastered</span></button>
+            </div>
+          </div>
+
+          <!-- Question 2: Concept Tagging -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-2">
+              2. What did your learning pod work on today?
+            </label>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="toggleTag(this)" class="tag-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-medium">Linear Equations</button>
+              <button type="button" onclick="toggleTag(this)" class="tag-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-medium">Factoring Quadratics</button>
+              <button type="button" onclick="toggleTag(this)" class="tag-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-medium">Slope & Graphs</button>
+              <button type="button" onclick="toggleTag(this)" class="tag-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-medium">ACT Strategy</button>
+              <button type="button" onclick="toggleTag(this)" class="tag-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-medium">Exponents & Roots</button>
+            </div>
+          </div>
+
+          <!-- Question 3: Identity & Reflection Voice/Text Memo -->
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">
+              3. One breakthrough moment or question for your mentor:
+            </label>
+            <p class="text-xs text-slate-400 mb-2">Helps Dr. Clarkson and mentors prepare for next week's session.</p>
+            <textarea rows="3" class="w-full text-sm rounded-xl border border-slate-200 p-3 focus:outline-none focus:ring-2 focus:ring-amber-400" placeholder="e.g., Ras helped me realize factoring is just backwards distribution..."></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-maroon hover:bg-red-900 text-white font-semibold py-3 rounded-xl transition shadow">
+            Submit My Pulse (Takes 30 seconds)
+          </button>
+        </form>
+
+        <div id="pulseSuccess" class="hidden mt-4 p-4 bg-emerald-50 text-emerald-800 rounded-xl text-center text-sm font-medium">
+          🎉 Awesome job! Your pulse has been logged for this week's community meal session.
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: MENTUTOR POD VIEW -->
+    <section id="view-pod" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">Cascading Pod 3</span>
+            <h2 class="text-xl font-bold mt-2">Undergraduate Mentutor Dashboard</h2>
+            <p class="text-sm text-slate-500">Lead Mentor: Ras (Math Education Senior)</p>
+          </div>
+          <button class="bg-slate-100 hover:bg-slate-200 text-xs font-semibold px-3 py-2 rounded-lg text-slate-700">Export Log</button>
+        </div>
+
+        <!-- 3-Tier Cascading Roster -->
+        <div class="mt-6 space-y-4">
+          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Assigned Cascading Community</h3>
+
+          <!-- Tier 1: 11th Grade Mentutors-in-training -->
+          <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-100">
+            <span class="text-xs font-bold text-amber-800">11th Grade Mentors (ACT Focus):</span>
+            <div class="mt-2 flex items-center justify-between text-sm">
+              <span class="font-medium text-slate-700">• Stephen W. (Algebra II / ACT)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-700 font-semibold px-2 py-0.5 rounded-full">Present</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-sm">
+              <span class="font-medium text-slate-700">• Zara K. (Pre-Calculus / ACT)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-700 font-semibold px-2 py-0.5 rounded-full">Present</span>
+            </div>
+          </div>
+
+          <!-- Tier 2: 8th Grade Mentees -->
+          <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-100">
+            <span class="text-xs font-bold text-rose-800">8th Grade Scholars (Algebra Readiness):</span>
+            <div class="mt-2 flex items-center justify-between text-sm">
+              <span class="font-medium text-slate-700">• Omar M. (Linear Equations)</span>
+              <span class="text-xs bg-emerald-100 text-emerald-700 font-semibold px-2 py-0.5 rounded-full">Pulse Completed (4/5)</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-sm">
+              <span class="font-medium text-slate-700">• DeeDee T. (Slope & Intercepts)</span>
+              <span class="text-xs bg-amber-100 text-amber-700 font-semibold px-2 py-0.5 rounded-full">Needs Pulse</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: RESEARCH & PROGRAM DIRECTORS VIEW -->
+    <section id="view-research" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full">Principal Investigator View</span>
+            <h2 class="text-xl font-bold mt-2">Dr. Lesa Clarkson | Longitudinal Analytics</h2>
+            <p class="text-sm text-slate-500">Measuring self-efficacy, retention, and mathematical identity</p>
+          </div>
+          <span class="text-xs bg-slate-100 px-3 py-1.5 rounded-lg text-slate-600 font-medium">Fall 2026 Cohort</span>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+            <span class="text-xs font-bold text-slate-400 uppercase">Avg Math Confidence</span>
+            <div class="text-2xl font-bold text-slate-800 mt-1">4.2 / 5.0</div>
+            <span class="text-xs text-emerald-600 font-medium">↑ +0.8 since Week 1</span>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+            <span class="text-xs font-bold text-slate-400 uppercase">Weekly Community Attendance</span>
+            <div class="text-2xl font-bold text-slate-800 mt-1">94%</div>
+            <span class="text-xs text-slate-500">10 Learning Pods Active</span>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
+            <span class="text-xs font-bold text-slate-400 uppercase">Qualitative Breakthroughs</span>
+            <div class="text-2xl font-bold text-slate-800 mt-1">142 Entries</div>
+            <span class="text-xs text-purple-600 font-medium">Coded for Publication</span>
+          </div>
+        </div>
+
+        <!-- Recent Voice / Identity Insights -->
+        <div class="mt-6 border-t border-slate-100 pt-4">
+          <h3 class="text-sm font-bold text-slate-700 mb-3">Live Participant Sentiment & Identity Highlights</h3>
+          <div class="space-y-3">
+            <div class="p-3 bg-slate-50 rounded-lg border-l-4 border-amber-400 text-xs">
+              <p class="italic text-slate-700">"Having an undergraduate mentor from my same high school made me realize college math isn't just for white guys."</p>
+              <span class="block mt-1 font-semibold text-slate-500">— 11th Grade Scholar (Pod 4)</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-lg border-l-4 border-maroon text-xs">
+              <p class="italic text-slate-700">"I used to hate tests, but explaining fractions to the 8th graders made me see how much I actually know."</p>
+              <span class="block mt-1 font-semibold text-slate-500">— 11th Grade Near-Peer Mentor (Pod 2)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive JavaScript logic -->
+  <script>
+    function switchTab(tab) {
+      ['pulse', 'pod', 'research'].forEach(t => {
+        document.getElementById('view-' + t).classList.add('hidden');
+        document.getElementById('tab-' + t).className = "px-3 py-1.5 rounded-lg text-amber-100 hover:text-white transition";
+      });
+      document.getElementById('view-' + tab).classList.remove('hidden');
+      document.getElementById('tab-' + tab).className = "px-3 py-1.5 rounded-lg bg-gold text-maroon shadow font-bold transition";
+    }
+
+    let selectedConfidence = null;
+    function selectScore(score) {
+      selectedConfidence = score;
+      document.querySelectorAll('.score-btn').forEach((btn, idx) => {
+        if (idx + 1 === score) {
+          btn.className = "score-btn p-3 rounded-xl bg-gold text-maroon font-bold border-2 border-amber-500 shadow-sm transition";
+        } else {
+          btn.className = "score-btn p-3 rounded-xl border border-slate-200 text-slate-700 font-bold hover:border-amber-400 transition";
+        }
+      });
+    }
+
+    function toggleTag(btn) {
+      if (btn.classList.contains('bg-slate-900')) {
+        btn.className = "tag-btn text-xs px-3 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-600 font-medium";
+      } else {
+        btn.className = "tag-btn text-xs px-3 py-1.5 rounded-full bg-slate-900 text-white font-medium";
+      }
+    }
+
+    function handlePulseSubmit(e) {
+      e.preventDefault();
+      document.getElementById('pulseSuccess').classList.remove('hidden');
+      setTimeout(() => {
+        document.getElementById('pulseSuccess').classList.add('hidden');
+        switchTab('pod');
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
